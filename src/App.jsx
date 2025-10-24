@@ -8,7 +8,7 @@ export default function App() {
   const [input, setInput] = useState("");
 
 
-  const agregarTarea = () => {
+  const   agregarTarea = () => {
 
     if (input.trim()) {
       setTareas([...tareas, { id: Date.now(), text: input.trim(), completed: false }]);
@@ -40,7 +40,7 @@ export default function App() {
         <button className="bg-blue-500 text-white px-4 p-y-2 rounded" onClick={agregarTarea} >Añadir Tareas</button>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 ">
         {tareas.map((tarea) => (<TodoItem key={tarea.id} tarea={tarea} toggleCompleted={toggleCompleted} eliminarTarea={eliminarTarea} />))}
       </div>
 
