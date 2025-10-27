@@ -2,8 +2,8 @@ name: Deploy React app to GitHub Pages
 
 on:
   push:
-    branches:
-      - develop  
+    branches: 
+      - develop
 
 permissions:
   contents: write
@@ -11,25 +11,30 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+  
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.jobs
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Build Project
+      run: npm run build
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Deploy to Github Pages 
+      uses:  peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        publish_dir: ./dist
+        publish_branch: gh-pages
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
 
-      - name: Install dependencies
-        run: npm install
+    
 
-      - name: Build project
-        run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages  
