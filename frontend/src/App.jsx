@@ -1,14 +1,14 @@
 import TodoItem from './TodoItem'
 import { useState, useEffect } from 'react'
 
-const API = 'http://localhost:4000/api/todos'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:4000'
 
 export default function App() {
   const [tareas, setTareas] = useState([])
   const [input, setInput] = useState('')
 
   useEffect(() => {
-    fetch(API)
+    fetch(`${API}/api/todos`)
       .then((r) => r.json())
       .then((data) => setTareas(data))
       .catch((err) => console.error('Error fetching todos', err))
@@ -17,7 +17,7 @@ export default function App() {
   const agregarTarea = async () => {
     if (input.trim()) {
       try {
-        const res = await fetch(API, {
+        const res = await fetch(`${API}/api/todos`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text: input.trim() }),
@@ -36,7 +36,7 @@ export default function App() {
     const tarea = tareas.find((t) => t.id === id)
     if (!tarea) return
     try {
-      const res = await fetch(`${API}/${id}`, {
+      const res = await fetch(`${API}/api/todos/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ completed: !tarea.completed }),
@@ -51,7 +51,7 @@ export default function App() {
 
   const eliminarTarea = async (id) => {
     try {
-      const res = await fetch(`${API}/${id}`, { method: 'DELETE' })
+      const res = await fetch(`${API}/api/todos/${id}`, { method: 'DELETE' })
       if (res.status === 204) {
         setTareas((prev) => prev.filter((t) => t.id !== id))
       } else {
