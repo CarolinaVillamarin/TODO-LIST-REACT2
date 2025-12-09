@@ -4,6 +4,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
+    "build": "echo 'No build needed'",
     "start": "node index.js"
   },
   "dependencies": {
