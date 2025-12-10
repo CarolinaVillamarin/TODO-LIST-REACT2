@@ -1,7 +1,7 @@
 import TodoItem from './TodoItem'
 import { useState, useEffect } from 'react'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 export default function App() {
   const [tareas, setTareas] = useState([])
