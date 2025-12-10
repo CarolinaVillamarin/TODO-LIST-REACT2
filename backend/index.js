@@ -5,7 +5,7 @@ require('./db')
 const todosRouter = require('./routes/todos')
 
 const app = express()
-app.use(cors())
+app.use(cors()) // Temporal: permitir todo origen para diagnóstico
 app.use(express.json())
 
 app.use('/api/todos', todosRouter)
