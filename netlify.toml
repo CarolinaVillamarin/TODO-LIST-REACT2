@@ -19,7 +19,7 @@
 
 # Variables de entorno
 [context.production.environment]
-  VITE_API_URL = "https://your-backend-url.railway.app"
+  VITE_API_URL = "https://todo-list-react2-production.up.railway.app"
 
 [context.deploy-preview.environment]
   VITE_API_URL = "http://localhost:4000"
